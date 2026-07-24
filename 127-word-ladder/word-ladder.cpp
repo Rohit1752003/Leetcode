@@ -14,7 +14,9 @@ public:
             for(int i =0 ; i < node.size();i++){
                 char og = node[i];
                 for(char ch = 'a' ; ch <= 'z';ch++ ){
+                     if(ch==og)continue;
                     node[i]= ch;
+                   
                     if(st.find(node) != st.end()){
                         q.push({node,steps+1});
                         st.erase(node);
