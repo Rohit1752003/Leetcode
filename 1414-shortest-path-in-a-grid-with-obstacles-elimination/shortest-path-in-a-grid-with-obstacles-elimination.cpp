@@ -46,7 +46,7 @@ private:
                 // Obstacle
                 else if (grid[nrow][ncol] == 1 &&
                          rem > 0 &&
-                         !vis[nrow][ncol][rem - 1]) {
+                         !vis[nrow][ncol][rem-1 ]) {
 
                     vis[nrow][ncol][rem - 1] = 1;
                     q.push({nrow, ncol, rem - 1, steps + 1});
