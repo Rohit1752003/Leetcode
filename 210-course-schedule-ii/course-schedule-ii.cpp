@@ -1,6 +1,6 @@
 class Solution {
       private:
-    vector<int> BFS(vector<vector<int>>& grid,vector<int>& indegree  ){
+    /*vector<int> BFS(vector<vector<int>>& grid,vector<int>& indegree  ){
         queue<int>q;
         for(int i = 0 ; i<indegree.size();i++){
             if(indegree[i]==0){
@@ -29,32 +29,73 @@ class Solution {
          }
          return ans;   
      }
-public:
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-          vector<vector<int>> grid(numCourses);
-        for(auto it : prerequisites){
-            grid[it[1]].push_back(it[0]);
-        }
-                vector<int> indegree(numCourses,0);
-        for(int i =0 ; i < numCourses ; i++){
-            for(auto it : grid[i]){
-                indegree[it]++;
+     */
+     private:
+    bool dfs(int node,
+             vector<vector<int>>& adj,
+             vector<int>& vis,
+             vector<int>& pathVis,
+             stack<int>& st) {
+
+        vis[node] = 1;
+        pathVis[node] = 1;
+
+        for (auto adjNode : adj[node]) {
+
+            if (!vis[adjNode]) {
+
+                if (dfs(adjNode, adj, vis, pathVis, st))
+                    return true;
+            }
+            else if (pathVis[adjNode]) {
+                return true;        // Cycle found
             }
         }
 
-        
-    //   stack<int>st;
-        // for(int i =0 ; i< V ; i++){
-        //     if(!vis[i]){
-                
-               
+        pathVis[node] = 0;
+        st.push(node);
+
+        return false;
+    }
+
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+       
+        //         vector<int> indegree(numCourses,0);
+        // for(int i =0 ; i < numCourses ; i++){
+        //     for(auto it : grid[i]){
+        //         indegree[it]++;
         //     }
         // }
 
-      
-             vector<int> ans = BFS(grid,indegree);
-             if(numCourses != ans.size())return{};
-             return ans;
+        
+      vector<vector<int>> adj(numCourses);
 
+        for (auto &it : prerequisites) {
+            adj[it[1]].push_back(it[0]);
+        }
+
+        vector<int> vis(numCourses, 0);
+        vector<int> pathVis(numCourses, 0);
+
+        stack<int> st;
+
+        for (int i = 0; i < numCourses; i++) {
+
+            if (!vis[i]) {
+
+                if (dfs(i, adj, vis, pathVis, st))
+                    return {};
+            }
+        }
+
+        vector<int> ans;
+
+        while (!st.empty()) {
+            ans.push_back(st.top());
+            st.pop();
+        }
+
+        return ans;
     }
 };
