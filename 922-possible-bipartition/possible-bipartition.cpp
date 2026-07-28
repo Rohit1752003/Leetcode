@@ -11,7 +11,7 @@ class Solution {
             q.pop();
             for(auto it : grid[node]){
                 if(color[it]==-1){
-                    color[it] =! color[node];
+                    color[it] = 1- color[node];
                     q.push(it);
                     
                 }
