@@ -1,4 +1,5 @@
 class Solution {
+    /*
 private:
     int BFS(int src, int dest,
             vector<vector<pair<int,int>>>& adj,
@@ -41,24 +42,56 @@ private:
 
         return dist[dest];
     }
+    */
 
 public:
     int findCheapestPrice(int n, vector<vector<int>>& flights,
                           int src, int dst, int k) {
 
-        vector<vector<pair<int,int>>> adj(n);
+        // vector<vector<pair<int,int>>> adj(n);
 
-        vector<int> dist(n, INT_MAX);
+        // vector<int> dist(n, INT_MAX);
 
-        for (auto &it : flights) {
+        // for (auto &it : flights) {
 
-            int u = it[0];
-            int v = it[1];
-            int w = it[2];
+        //     int u = it[0];
+        //     int v = it[1];
+        //     int w = it[2];
 
-            adj[u].push_back({v, w});
+        //     adj[u].push_back({v, w});
+        // }
+
+        // return BFS(src, dst, adj, dist, k);
+
+
+        //  bellman ford 
+        vector<int> dist(n,1e8);
+        dist[src]=0;
+        for(int i =0 ; i<= k ; i++){
+
+            vector<int> temp = dist;
+                for(auto it : flights){
+                    int u = it[0];
+                    int v = it[1];
+                    int w = it[2];
+                      if (dist[u] != 1e8 && dist[u] + w < temp[v]) {
+                    temp[v] = dist[u] + w;   
+                    
+                }
+              
+            }
+            dist= temp;
+           
+            
         }
-
-        return BFS(src, dst, adj, dist, k);
+        
+        
+        // for(auto it : flights){
+        //      int u = it[0];
+        //             int v = it[1];
+        //             int w = it[2];
+        //             if(dist[u] != 1e8 && dist[u]+ w < dist[v])return {-1};
+        // }
+        return dist[dst] == 1e8 ? -1 : dist[dst];
     }
 };
