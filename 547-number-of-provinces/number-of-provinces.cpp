@@ -1,13 +1,15 @@
 class DSU {
 public:
-    vector<int> parent, rank;
+    vector<int> parent, rank ,size;
 
     DSU(int n) {
         parent.resize(n);
         rank.resize(n, 0);
-
-        for (int i = 0; i < n; i++)
+        size.resize(n);
+        for (int i = 0; i < n; i++){
             parent[i] = i;
+            size[i]= 1;
+    }
     }
 
     int find(int node) {
@@ -39,6 +41,27 @@ public:
 
             parent[pv] = pu;
             rank[pu]++;
+        }
+    }
+    void unionBySize(int u, int v) {
+
+        int pu = find(u);
+        int pv = find(v);
+
+        if (pu == pv)
+            return;
+
+        if (size[pu] < size[pv]) {
+
+            parent[pu] = pv;
+            size[pv] += size[pu];
+
+        }
+        else {
+
+            parent[pv] = pu;
+            size[pu] += size[pv];
+
         }
     }
 };
@@ -116,7 +139,7 @@ public:
 
                 if (isConnected[i][j] == 1) {
 
-                    ds.unionByRank(i, j);
+                    ds.unionBySize(i, j);
                 }
             }
         }
