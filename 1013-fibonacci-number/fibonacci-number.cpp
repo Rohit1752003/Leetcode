@@ -14,7 +14,7 @@ public:
 
 //     2nd Approach Tabulation 
           if(n==0 || n==1)return n;
-     vector<int> dp(n + 1, -1);
+    /* vector<int> dp(n + 1, -1);
 
         dp[0] = 0;
         dp[1] = 1;
@@ -22,7 +22,16 @@ public:
         for (int i = 2; i <= n; i++)
             dp[i] = dp[i - 1] + dp[i - 2];
 
-        return dp[n];
+        return dp[n]; */
        
+    //    Space optimize way 
+    int a = 0 , b = 1 ,c ;
+     for (int i = 2; i <= n; i++){
+        c = a+b;
+        a=b;
+        b=c;
+
+     }
+     return c;
     }
 };
