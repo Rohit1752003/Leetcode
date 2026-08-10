@@ -8,11 +8,11 @@ class Solution {
     if(dp[i][j] != -1)
         return dp[i][j];
 
-    int down = solve(i-1,j,dp);
+    int up = solve(i-1,j,dp);
 
-    int right = solve(i,j-1,dp);
+    int left = solve(i,j-1,dp);
 
-    return dp[i][j]=down+right;
+    return dp[i][j]=up+left;
 }
 public:
     int uniquePaths(int m, int n) {
