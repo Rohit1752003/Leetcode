@@ -1,9 +1,32 @@
 class Solution {
+    bool DFS(int node,
+         int dest,
+         vector<vector<int>>& adj,
+         vector<int>& vis){
+
+    if(node == dest)
+        return true;
+
+    vis[node] = 1;
+
+    for(auto it : adj[node]){
+
+        if(!vis[it]){
+
+            if(DFS(it,dest,adj,vis))
+                return true;
+        }
+    }
+
+    return false;
+}
 public:
     vector<bool> checkIfPrerequisite(
         int numCourses,
         vector<vector<int>>& prerequisites,
         vector<vector<int>>& queries) {
+
+
 
         vector<vector<int>> adj(numCourses);
         vector<int> indegree(numCourses, 0);
@@ -15,7 +38,7 @@ public:
             adj[u].push_back(v);
             indegree[v]++;
         }
-
+/*
         vector<vector<bool>> pre(
             numCourses,
             vector<bool>(numCourses, false));
@@ -58,5 +81,22 @@ public:
         }
 
         return ans;
+        */
+
+        vector<bool> ans;
+
+    for(int i=0;i<queries.size();i++){
+
+    int src  = queries[i][0];
+    int dest = queries[i][1];
+
+    vector<int> vis(numCourses,0);
+
+    ans.push_back(
+        DFS(src,dest,adj,vis)
+    );
+}
+        return ans;
     }
+    
 };
