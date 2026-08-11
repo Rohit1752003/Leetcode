@@ -13,22 +13,25 @@ class Solution {
          int delRow[] = {-1,0,1,0};
          int delCol[] = {0,1,0,-1};
         while(!pq.empty()){
-            int Currdiff= pq.top().first;
+            int currDiff = pq.top().first;
             int row = pq.top().second.first;
             int col = pq.top().second.second;
             pq.pop();
-            if(row==n-1 && col==m-1)return Currdiff;
-            if(Currdiff > dist[row][col])continue;
+            if(currDiff > dist[row][col])continue;
+            if(row  == n-1 && col == m-1)return currDiff;
             for(int i =0 ; i< 4 ; i++){
                 int nrow = row + delRow[i];
                 int ncol = col + delCol[i];
-                if(nrow >=0 && nrow<n && ncol>=0 && ncol<m){
-                    int newDiff = max(Currdiff,abs(mat[row][col]-mat[nrow][ncol]));
-                    if(newDiff < dist[nrow][ncol]){
-                        dist[nrow][ncol]=newDiff;
-                        pq.push({newDiff,{nrow,ncol}});
-                    }
+              if(nrow < 0 || nrow >= n ||
+                        ncol < 0 || ncol >= m)
+                            continue;
+                int newDiff = max(currDiff , abs(mat[row][col] - mat[nrow][ncol]));
+
+                if(newDiff < dist[nrow][ncol]){
+                    dist[nrow][ncol]= newDiff;
+                    pq.push({dist[nrow][ncol],{ nrow,ncol}});
                 }
+
             }
         }
         
@@ -44,3 +47,5 @@ public:
         return BFS(0,0,heights,effort);
     }
 };
+
+ 
