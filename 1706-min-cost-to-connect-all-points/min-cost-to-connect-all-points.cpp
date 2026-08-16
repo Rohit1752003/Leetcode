@@ -20,7 +20,8 @@ public:
             for(int i =0 ; i< n ; i++){
                 if(!vis[i]){
                     int wt = abs(points[node][0]-points[i][0])+abs(points[node][1]-points[i][1]);
-                    pq.push({wt,i});
+                    pq.push({wt,i}); // points[node][0] -- node is int not vector so if node 2 then 
+                    //   on points 2nd position element and index 0 so points[2][0] ==3 and points[2][1]==10
                 }
             }
         }
