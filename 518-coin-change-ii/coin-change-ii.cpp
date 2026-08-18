@@ -1,7 +1,7 @@
 class Solution {
      int solve(int i , int target ,vector<int>& arr, vector<vector<int>> &dp ){
-         if(target == 0 ) return 1;
-        //  if(target ==0 && (target + arr[i])%2 == 0 )return 1;
+        //  if(target == 0 ) return 1;
+         if(target ==0 && (target + arr[i])%2 == 0 )return 1;
         if(i == 0){
             if(target % arr[0] == 0) return 1;
            
