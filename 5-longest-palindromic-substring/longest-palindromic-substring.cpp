@@ -2,45 +2,50 @@ class Solution {
 public:
     string longestPalindrome(string s) {
 
-        int n = s.size();
+        string text1 = s;
+        string text2 = s;
 
-        vector<vector<bool>> dp(
-            n,
-            vector<bool>(n, false)
+        reverse(text2.begin(), text2.end());
+
+        int n = text1.size();
+        int m = text2.size();
+
+        vector<vector<int>> dp(
+            n + 1,
+            vector<int>(m + 1, 0)
         );
 
+        int maxLen = 0;
         int start = 0;
-        int maxLen = 1;
 
-        // Length = 1
-        for(int i = 0; i < n; i++) {
-            dp[i][i] = true;
-        }
+        for(int i = 1; i <= n; i++) {
 
-        // Length = 2, 3, 4, ...
-        for(int len = 2; len <= n; len++) {
+            for(int j = 1; j <= m; j++) {
 
-            for(int i = 0;
-                 i + len - 1 < n;
-                 i++) {
+                if(text1[i-1] == text2[j-1]) {
 
-                int j = i + len - 1;
+                    dp[i][j] =
+                        1 + dp[i-1][j-1];
 
-                if(s[i] == s[j]) {
+                    int len = dp[i][j];
 
-                    if(len == 2)
-                        dp[i][j] = true;
+                    // Start of this substring in text1
+                    int start1 = i - len;
 
-                    else
-                        dp[i][j] =
-                            dp[i+1][j-1];
+                    // Corresponding mirrored start in text1
+                    int start2 = n - j;
+
+                    // They must refer to the same interval
+                    if(start1 == start2 && len > maxLen) {
+
+                        maxLen = len;
+                        start = start1;
+                    }
+
                 }
+                else {
 
-                if(dp[i][j] &&
-                   len > maxLen) {
-
-                    maxLen = len;
-                    start = i;
+                    dp[i][j] = 0;
                 }
             }
         }
