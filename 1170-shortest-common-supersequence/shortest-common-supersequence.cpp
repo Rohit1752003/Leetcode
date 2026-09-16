@@ -18,34 +18,32 @@ public:
 
             }
         }
-        int i = n , j =m ;
-        while(i > 0 && j > 0){
-            if(str1[i-1] == str2[j-1]){
-                str += str1[i-1] ;
-                i--, j--;
-            }
-            else if (dp[i-1][j] > dp[i][j-1]){
-                str += str1[i-1] ;
-                i--;
-            }
-            else {
-                str += str2[j-1];
-                j--;
-            }
+       int i = n , j = m;
+
+       while(i >0 && j > 0){
+        if(str1[i-1] == str2[j-1]){
+            str += str1[i-1];
+            i-- , j--;
         }
-         while(i > 0) {
+        else if(dp[i][j-1] < dp[i-1][j]){
             str += str1[i-1];
             i--;
         }
-
-        while(j > 0) {
-            str += str2[j-1];
+        else {
+            str += str2[j-1] ;
             j--;
         }
-
-        reverse(str.begin(), str.end());
-
-        return str;
+       }
+       while(i>0){
+        str += str1[i-1];
+        i--;
+       }
+       while(j> 0){
+        str += str2[j-1];
+        j--;
+       }
+       reverse(str.begin() , str.end());
+       return str;
        
     }
 };
