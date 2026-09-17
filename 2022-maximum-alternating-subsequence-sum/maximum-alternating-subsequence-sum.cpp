@@ -9,7 +9,7 @@ class Solution {
         if(dp[i][sign] != -1)
             return dp[i][sign];
 
-        if(sign == 1) {
+        if(sign) {
 
             long long take =
                 nums[i] + solve(i+1, 0, nums, dp);
