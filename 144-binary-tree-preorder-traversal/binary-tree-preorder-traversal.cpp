@@ -1,6 +1,6 @@
 class Solution {
-   void solve(TreeNode* root , vector<int>& ans){
-    if(!root)return;
+     vector<int>  solve(TreeNode* root , vector<int>& ans){
+    if(!root)return ans;
 
     ans.push_back(root->val);
     if(root->left)
@@ -8,6 +8,7 @@ class Solution {
 
         if(root->right)
     solve(root->right , ans);
+    return ans;
    }
 public:
     vector<int> preorderTraversal(TreeNode* root) {
@@ -43,7 +44,7 @@ public:
 
         // 3rd Approach
 
-        solve(root , ans);
-        return ans;
+        return solve(root , ans);
+        // return ans;
     }
 };
