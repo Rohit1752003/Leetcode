@@ -10,23 +10,27 @@ class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
         // Iterative Approach 
-      /*  stack<TreeNode*>st;
-        TreeNode* node = root;
+       stack<TreeNode*>st;
+        TreeNode* curr = root;
         vector<int> ans;
-        while(true){
-            if(node!=NULL){
-                st.push(node->val);
-                node= node->left;
+        while (curr != nullptr || !st.empty()) {
+
+            // Go as far left as possible
+            while (curr != nullptr) {
+                st.push(curr);
+                curr = curr->left;
             }
-            else{
-                if(st.empty()==true)break;
-                node = st.top();
-                st.pop();
-                ans.push_back(node->val);
-                node= node->right;
-            }
+
+            // Left is finished → process root
+            curr = st.top();
+            st.pop();
+
+            ans.push_back(curr->val);
+
+            // Now explore right subtree
+            curr = curr->right;
         }
-        
+        /*
         vector<int> ans;
         if (!root) return ans;
 
@@ -44,8 +48,12 @@ public:
         return ans;
         */
 
-         vector<int> ans;
+
+//     3rd Approach
+        //  vector<int> ans;
       
-        return solve(root  , ans);
+        // return solve(root  , ans);
+
+        return ans;
     }
 };
