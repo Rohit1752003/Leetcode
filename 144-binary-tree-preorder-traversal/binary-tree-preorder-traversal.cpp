@@ -1,5 +1,14 @@
 class Solution {
-   
+   void solve(TreeNode* root , vector<int>& ans){
+    if(!root)return;
+
+    ans.push_back(root->val);
+    if(root->left)
+    solve(root->left , ans);
+
+        if(root->right)
+    solve(root->right , ans);
+   }
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> ans;
@@ -18,19 +27,23 @@ public:
 
         // return ans;
 
+        // 2Nd Approch
+        //  if(!root )return ans ;
 
-         if(!root )return ans ;
+        // stack<TreeNode*> st;
+        // st.push(root);
+        // while(!st.empty()){
+        //     TreeNode* node = st.top();
+        //     st.pop();
+        //     ans.push_back(node->val);
+        //     if(node->right)st.push(node->right);
+        //      if(node->left)st.push(node->left);
 
-        stack<TreeNode*> st;
-        st.push(root);
-        while(!st.empty()){
-            TreeNode* node = st.top();
-            st.pop();
-            ans.push_back(node->val);
-            if(node->right)st.push(node->right);
-             if(node->left)st.push(node->left);
+        // }
 
-        }
+        // 3rd Approach
+
+        solve(root , ans);
         return ans;
     }
 };
