@@ -10,7 +10,7 @@
  * };
  */
 class Solution {
-    void solve(TreeNode* root , string path , long long &ans){
+    void solve(TreeNode* root , string path , long long& ans){
         if(!root)return ;
 
         path += to_string(root->val);
