@@ -29,45 +29,59 @@ public:
     TreeNode* lowestCommonAncestor(TreeNode* root,
                                    TreeNode* p,
                                    TreeNode* q) {
+        
+        if(!root)return nullptr;
+        if( root== p || root==q)return root;
 
-        vector<int> path;
-        vector<int> p1;
-        vector<int> q1;
+       TreeNode* left =  lowestCommonAncestor(root->left , p , q);
+      TreeNode* right =   lowestCommonAncestor(root->right , p , q);
+        if (left && right)
+        return root;
 
-        solve(root, p->val, q->val, path, p1, q1);
+    if (left)
+        return left;
 
-        int ans = -1;
+    return right;
 
-        int i = 0;
+        
+        // vector<int> path;
+        // vector<int> p1;
+        // vector<int> q1;
 
-        while (i < p1.size() && i < q1.size()) {
+        // solve(root, p->val, q->val, path, p1, q1);
 
-            if (p1[i] != q1[i])
-                break;
+        // int ans = -1;
 
-            ans = p1[i];
-            i++;
-        }
+        // int i = 0;
 
-        // Find the actual node having this value
-        queue<TreeNode*> qu;
-        qu.push(root);
+        // while (i < p1.size() && i < q1.size()) {
 
-        while (!qu.empty()) {
+        //     if (p1[i] != q1[i])
+        //         break;
 
-            TreeNode* curr = qu.front();
-            qu.pop();
+        //     ans = p1[i];
+        //     i++;
+        // }
 
-            if (curr->val == ans)
-                return curr;
+        // // Find the actual node having this value
+        // queue<TreeNode*> qu;
+        // qu.push(root);
 
-            if (curr->left)
-                qu.push(curr->left);
+        // while (!qu.empty()) {
 
-            if (curr->right)
-                qu.push(curr->right);
-        }
+        //     TreeNode* curr = qu.front();
+        //     qu.pop();
 
-        return nullptr;
+        //     if (curr->val == ans)
+        //         return curr;
+
+        //     if (curr->left)
+        //         qu.push(curr->left);
+
+        //     if (curr->right)
+        //         qu.push(curr->right);
+        // }
+
+        // return nullptr;
     }
 };
