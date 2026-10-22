@@ -13,7 +13,7 @@ public:
         while (!pq.empty() || !q.empty()) {
             time++;
 
-            if (!q.empty() && q.front().second <= time) {
+            while (!q.empty() && q.front().second <= time) {
                 pq.push(q.front().first);
                 q.pop();
             }
