@@ -39,8 +39,8 @@ public:
                 if (cnt > 1) {
                     q.push({{cnt - 1, ch}, time + 2});
                 }
-            } else if (!q.empty()) {
-                return "";
+            }else if (!q.empty()) {
+                return ""; 
             }
         }
 
