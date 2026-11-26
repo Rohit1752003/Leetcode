@@ -13,5 +13,13 @@ public:
             if(!ans[i] )return false;
         }
         return true;
+        
+
+
+        // Approach 2 Greedy
+
+        sort(ranges.begin() , ranges.end());
+
+        
     }
 };
